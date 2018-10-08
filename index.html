@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>colorRandom</title>
+    <link rel="stylesheet" href="./main.css">
+</head>
+
+<body>
+    <main class="main" id="main">
+        <div class="cardColor">
+            <form id="formColor">
+                <p>
+                    <input type="number" placeholder="saturation" max="100" min="1" id="saturation" name="saturation">
+                </p>
+                <p>
+                    <input type="number" placeholder="ligthness" max="100" min="1" id="ligthness" name="ligthness">
+                </p>
+                <p>
+                    <input type="text" placeholder="opacity" id="opacity" name="opacity">
+                </p>
+                <p>
+                    <button type="submit" id="btnGoColor">Go color</button>
+                </p>
+                <h3 id="txtcolor"></h3>
+            </form>
+        </div>
+    </main>
+
+    <script src="./main.js"></script>
+    <script>
+
+        const formColor = document.getElementById("formColor");
+        const saturation = document.getElementById("saturation");
+        const ligthness = document.getElementById("ligthness");
+        const opacity = document.getElementById("opacity");
+        const btnGoColor = document.getElementById("btnGoColor");
+        const main = document.getElementById("main");
+        const txtcolor = document.getElementById("txtcolor");
+
+
+        formColor.addEventListener("submit", e => {
+            e.preventDefault();
+            btnGoColor.style.color = "white";
+
+           /**********************    ************************/
+            // hacemos un objeto con la configuracion que pasaremos como parametro
+            let objcolor1 = {
+                saturation: saturation.value, // optional
+                ligthness: ligthness.value, // optional
+                opacity: opacity.value // optional
+            }
+            // instanciamos e llamamos al metodo getRandomColor que nos retornara un color en hsl
+            let rcolor = new ColorRandom(objcolor1);
+            let color = rcolor.getRandomColor();
+
+            // ahora ponemos el color retornado a los elementos
+            btnGoColor.style.backgroundColor = color;
+            main.style.backgroundColor = color;
+            /**********************    ************************/
+
+            let txtColor = main.style.backgroundColor;
+            txtcolor.innerText = txtColor;
+
+
+        })
+
+
+
+
+    </script>
+</body>
+
+</html>
